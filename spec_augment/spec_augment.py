@@ -97,8 +97,7 @@ class SpecAugment(Layer):
         :return: A mel spectrogram after the time and frequency are applied
         """
         if training:
-            inputs_masked = tf.map_fn(elems=inputs, fn=self._apply_spec_augment)
-            return inputs_masked
+            return tf.map_fn(elems=inputs, fn=self._apply_spec_augment)
         return inputs
 
     def get_config(self):
@@ -106,11 +105,10 @@ class SpecAugment(Layer):
         Generates a description of the parameters selected. It uses the notation in the paper
         :return:
         """
-        config = {
+        return {
             "freq_mask_param": self.freq_mask_param,
             "time_mask_param": self.time_mask_param,
             "n_freq_mask": self.n_freq_mask,
             "n_time_mask": self.n_time_mask,
             "mask_value": self.mask_value.numpy(),
         }
-        return config
